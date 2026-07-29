@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Happy Birthday Anu ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        handwriting: ['Dancing Script', 'cursive'],
+                        casual: ['Caveat', 'cursive'],
+                    },
+                    colors: {
+                        roseGold: '#f472b6',
+                        gold: '#fef08a',
+                        deepRose: '#1f0914',
+                        night: '#08030f',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'heartbeat': 'heartbeat 1.8s cubic-bezier(0.215, 0.61, 0.355, 1) infinite',
+                        'soft-glow': 'softGlow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        heartbeat: {
+                            '0%': { transform: 'scale(1)', filter: 'drop-shadow(0 0 15px rgba(236,72,153,0.5))' },
+                            '14%': { transform: 'scale(1.12)', filter: 'drop-shadow(0 0 28px rgba(244,114,182,0.9))' },
+                            '28%': { transform: 'scale(1)', filter: 'drop-shadow(0 0 15px rgba(236,72,153,0.5))' },
+                            '42%': { transform: 'scale(1.08)', filter: 'drop-shadow(0 0 22px rgba(244,114,182,0.7))' },
+                            '70%': { transform: 'scale(1)', filter: 'drop-shadow(0 0 15px rgba(236,72,153,0.5))' }
+                        },
+                        softGlow: {
+                            '0%': { opacity: 0.5, transform: 'scale(0.98)' },
+                            '100%': { opacity: 1, transform: 'scale(1.03)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            min-height: 100dvh;
+            background: radial-gradient(circle at 50% 20%, #1e0b26 0%, #0d0414 55%, #050209 100%);
+            background-attachment: fixed;
+            color: #fce7f3;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(5, 2, 9, 0.9);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ec4899 0%, #a855f7 100%);
+            border-radius: 9999px;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .glass-card-glow {
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.12) 0%, rgba(168, 85, 247, 0.06) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+            transition: all 0.4s ease;
+        }
+
+        /* Romantic Glow Button */
+        .btn-glow {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 22px rgba(236, 72, 153, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+        .btn-glow:hover, .btn-glow:active {
+            box-shadow: 0 0 32px rgba(236, 72, 153, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #ffffff 0%, #fef08a 45%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-rose {
+            background: linear-gradient(135deg, #ffffff 0%, #f472b6 50%, #fb7185 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Smooth Romantic Transitions */
+        .step-container {
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .step-hidden {
+            opacity: 0;
+            transform: translateY(18px) scale(0.98);
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+        }
+        .step-active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            position: relative;
+            width: 100%;
+        }
+
+        /* Typewriter Cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 0.8s step-start infinite;
+            color: #f472b6;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="min-h-[100dvh] flex flex-col justify-between items-center font-sans antialiased relative selection:bg-pink-500 selection:text-white">
+
+    <!-- Ambient Glow Background -->
+    <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-pink-600/10 rounded-full blur-[110px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-10 right-10 w-[300px] h-[300px] bg-purple-600/10 rounded-full blur-[90px] pointer-events-none z-0"></div>
+
+    <!-- Background Canvas for Realistic Floating Hearts -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Sound Control Button (Top Right) -->
+    <button id="soundToggleBtn" onclick="toggleMute()" class="fixed top-4 right-4 z-50 px-3.5 py-2 rounded-full glass-card flex items-center space-x-2 text-pink-300 hover:text-white hover:border-pink-400 transition-all shadow-xl text-xs backdrop-blur-md" title="Toggle Sound">
+        <i id="soundIcon" class="fas fa-volume-high text-pink-400"></i>
+        <span id="soundText" class="font-medium tracking-wide">Sound ON</span>
+    </button>
+
+    <!-- 🎬 OPENING OVERLAY -->
+    <div id="openingOverlay" class="fixed inset-0 bg-[#050209] z-50 flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-opacity duration-1000">
+        <div class="absolute w-80 h-80 bg-pink-500/15 rounded-full blur-3xl pointer-events-none animate-soft-glow"></div>
+
+        <div class="max-w-md mx-auto relative z-10 space-y-6">
+            <div id="tapPrompt" class="space-y-5 animate-pulse">
+                <!-- Realistic Beating Heart -->
+                <div class="w-20 h-20 mx-auto flex items-center justify-center animate-heartbeat">
+                    <svg viewBox="0 0 100 100" class="w-full h-full filter drop-shadow-[0_0_20px_rgba(236,72,153,0.8)]">
+                        <defs>
+                            <linearGradient id="introHeartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#fda4af" />
+                                <stop offset="40%" stop-color="#f43f5e" />
+                                <stop offset="100%" stop-color="#9f1239" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 88 C20 65, 5 45, 5 28 C5 14, 16 5, 30 5 C39 5, 46 10, 50 17 C54 10, 61 5, 70 5 C84 5, 95 14, 95 28 C95 45, 80 65, 50 88 Z" fill="url(#introHeartGrad)"/>
+                        <path d="M30 10 C20 10, 12 16, 11 25 C15 16, 22 12, 30 12 Z" fill="#ffffff" opacity="0.4"/>
+                    </svg>
+                </div>
+                <p class="text-pink-200/80 text-xs tracking-widest uppercase font-semibold">Tap anywhere to begin</p>
+            </div>
+
+            <div id="introTextContainer" class="hidden min-h-[140px] flex flex-col items-center justify-center">
+                <p id="introTypedText" class="text-xl md:text-2xl font-serif text-pink-100 leading-relaxed font-medium tracking-wide drop-shadow-lg"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP WRAPPER -->
+    <main class="w-full max-w-xl mx-auto min-h-[100dvh] flex flex-col justify-center items-center px-4 pt-16 pb-28 relative z-10">
+
+        <!-- ❤️ STEP 1 – Welcome -->
+        <section id="step-1" class="step-container step-hidden flex flex-col items-center text-center my-auto">
+            <div class="relative mb-6">
+                <!-- 3D Realistic Heart Container -->
+                <div class="w-28 h-28 rounded-full glass-card-glow flex items-center justify-center p-5 shadow-2xl animate-heartbeat">
+                    <svg viewBox="0 0 100 100" class="w-full h-full filter drop-shadow-[0_0_18px_rgba(244,114,182,0.9)]">
+                        <defs>
+                            <linearGradient id="mainHeartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#fecdd3" />
+                                <stop offset="35%" stop-color="#f43f5e" />
+                                <stop offset="100%" stop-color="#881337" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 88 C20 65, 5 45, 5 28 C5 14, 16 5, 30 5 C39 5, 46 10, 50 17 C54 10, 61 5, 70 5 C84 5, 95 14, 95 28 C95 45, 80 65, 50 88 Z" fill="url(#mainHeartGrad)"/>
+                        <path d="M30 10 C20 10, 12 16, 11 25 C15 16, 22 12, 30 12 Z" fill="#ffffff" opacity="0.45"/>
+                    </svg>
+                </div>
+                <div class="absolute -bottom-1 -right-1 bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-400 text-slate-950 text-xs font-extrabold px-3 py-0.5 rounded-full shadow-lg border border-amber-100/50">
+                    Au Heart ✨
+                </div>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-serif font-bold text-gradient-gold mb-3 tracking-wide drop-shadow-md">
+                Hey Anu ❤️
+            </h1>
+
+            <p class="text-pink-200/80 text-lg mb-8 max-w-sm font-light leading-relaxed">
+                I made something special for you...
+            </p>
+
+            <button onclick="goToStep(2)" class="btn-glow px-8 py-4 rounded-full bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 text-white font-semibold tracking-wide flex items-center space-x-3 text-base group border border-pink-400/30">
+                <span>Let's Begin</span>
+                <i class="fas fa-sparkles text-amber-300 group-hover:rotate-12 transition-transform"></i>
+            </button>
+        </section>
+
+        <!-- 🎂 STEP 2 – Happy Birthday -->
+        <section id="step-2" class="step-container step-hidden flex flex-col items-center text-center my-auto">
+            <div class="glass-card-glow p-7 md:p-10 rounded-3xl w-full text-center relative overflow-hidden">
+                <div class="absolute -top-12 -right-12 w-36 h-36 bg-pink-500/20 rounded-full blur-2xl"></div>
+                <div class="absolute -bottom-12 -left-12 w-36 h-36 bg-purple-500/20 rounded-full blur-2xl"></div>
+
+                <div class="inline-block p-4 rounded-2xl bg-white/10 border border-white/15 text-amber-300 text-3xl mb-6 shadow-xl animate-float">
+                    🎂
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-gradient-rose mb-4">
+                    Happy Birthday! 🎉
+                </h2>
+
+                <div class="w-16 h-0.5 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mb-6 opacity-70"></div>
+
+                <p class="text-pink-100/90 text-base md:text-lg leading-relaxed font-light mb-8">
+                    On your special day, I just want to wish you endless happiness, success, good health, and countless reasons to smile. I hope this year brings you everything you've been hoping for.
+                </p>
+
+                <button onclick="goToStep(3)" class="btn-glow w-full sm:w-auto px-7 py-3.5 rounded-full bg-gradient-to-r from-pink-500 to-rose-600 text-white text-sm md:text-base font-semibold tracking-wide flex items-center justify-center space-x-2 mx-auto border border-pink-300/30">
+                    <span>Things You Should Know About Yourself ❤️</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 🌸 STEP 3 – Things You Should Know About Yourself (Chrome Android Optimized) -->
+        <section id="step-3" class="step-container step-hidden flex flex-col items-center w-full pt-4">
+            <div class="text-center mb-6 pt-2">
+                <span class="text-xs uppercase tracking-widest text-pink-400 font-semibold mb-1 block">Special Qualities</span>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-gradient-gold">
+                    Things You Should Know 🌸
+                </h2>
+            </div>
+
+            <!-- Scrollable Cards Stack -->
+            <div class="w-full space-y-4 mb-8">
+                <!-- Trait 1: Au Heart -->
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-amber-400 hover:border-l-amber-300 transition-all">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <span class="text-2xl">💛</span>
+                        <h3 class="text-lg font-bold text-amber-200">Au Heart</h3>
+                    </div>
+                    <p class="text-sm text-pink-100/85 leading-relaxed pl-9 font-light">
+                        There was a reason I called you "Au Heart." To me, it always meant someone with a Golden Heart—pure, genuine, and rare. I hope life never changes that part of you.
+                    </p>
+                </div>
+
+                <!-- Trait 2 -->
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-sky-400 hover:border-l-sky-300 transition-all">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <span class="text-2xl">🕊️</span>
+                        <h3 class="text-lg font-bold text-sky-200">Too Innocent for This World</h3>
+                    </div>
+                    <p class="text-sm text-pink-100/85 leading-relaxed pl-9 font-light">
+                        One thing I've always noticed about you is how innocent you are. In a world where people often hide behind masks, you stayed genuine. That's something truly rare.
+                    </p>
+                </div>
+
+                <!-- Trait 3 -->
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-pink-400 hover:border-l-pink-300 transition-all">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <span class="text-2xl">🌸</span>
+                        <h3 class="text-lg font-bold text-pink-200">Your Simplicity Is Your Biggest Strength</h3>
+                    </div>
+                    <p class="text-sm text-pink-100/85 leading-relaxed pl-9 font-light">
+                        You don't try to impress people, and that's exactly what makes you stand out.
+                    </p>
+                </div>
+
+                <!-- Trait 4 -->
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-purple-400 hover:border-l-purple-300 transition-all">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <span class="text-2xl">💖</span>
+                        <h3 class="text-lg font-bold text-purple-200">Never Stop Being Yourself</h3>
+                    </div>
+                    <p class="text-sm text-pink-100/85 leading-relaxed pl-9 font-light">
+                        The world already has enough people pretending to be someone else.
+                    </p>
+                </div>
+
+                <!-- Trait 5 -->
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald-400 hover:border-l-emerald-300 transition-all">
+                    <div class="flex items-center space-x-3 mb-2">
+                        <span class="text-2xl">🌈</span>
+                        <h3 class="text-lg font-bold text-emerald-200">You Deserve a Life Full of Smiles</h3>
+                    </div>
+                    <p class="text-sm text-pink-100/85 leading-relaxed pl-9 font-light">
+                        I truly hope every year brings you closer to your dreams.
+                    </p>
+                </div>
+            </div>
+
+            <button onclick="goToStep(4)" class="btn-glow px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white font-semibold flex items-center space-x-2 border border-pink-300/30">
+                <span>A Little Surprise ❤️</span>
+            </button>
+        </section>
+
+        <!-- 📸 STEP 4 – Memories -->
+        <section id="step-4" class="step-container step-hidden flex flex-col items-center w-full pt-4">
+            <div class="text-center mb-6 pt-2">
+                <span class="text-xs uppercase tracking-widest text-pink-400 font-semibold mb-1 block">Precious Moments</span>
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-gradient-rose">
+                    Memories & Moments 📸
+                </h2>
+            </div>
+
+            <!-- Slideshow Card -->
+            <div class="glass-card p-4 md:p-6 rounded-3xl w-full mb-6 relative">
+                <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-950/80 border border-white/15 shadow-2xl mb-4 group flex items-center justify-center">
+                    
+                    <!-- Image Element -->
+                    <img id="galleryImage" src="assets/pic1.jpg" alt="Memory" 
+                         onerror="handleImageError(this)" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+
+                    <!-- Fallback Placeholder Card -->
+                    <div id="imageFallbackCard" class="hidden absolute inset-0 bg-gradient-to-br from-pink-900/40 via-purple-900/30 to-slate-950 flex flex-col items-center justify-center p-6 text-center border border-pink-500/20">
+                        <div class="w-16 h-16 rounded-full bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-300 text-2xl mb-3 shadow-lg">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h4 id="fallbackTitle" class="text-xl font-bold font-serif text-gradient-gold mb-1">pic 1</h4>
+                        <p class="text-xs text-pink-200/60 font-mono">assets/pic1.jpg</p>
+                    </div>
+
+                    <!-- Overlay Gradient -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none"></div>
+
+                    <!-- Slide Caption -->
+                    <div class="absolute bottom-3 left-4 right-4 text-left pointer-events-none">
+                        <p id="galleryCaption" class="text-xs md:text-sm font-medium text-pink-200 drop-shadow-md">
+                            ✨ "Moments that shine brightly..."
+                        </p>
+                    </div>
+
+                    <!-- Slide Controls -->
+                    <button onclick="prevSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/25 transition-all shadow-lg active:scale-95 z-20">
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </button>
+                    <button onclick="nextSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/25 transition-all shadow-lg active:scale-95 z-20">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Slide Dots -->
+                <div class="flex justify-center space-x-2 mb-4" id="slideDots"></div>
+
+                <p class="text-sm text-pink-100/85 text-center leading-relaxed italic px-2 font-light">
+                    "Every memory has its own place in life. Some stay with us because they remind us of genuine people. Wishing you many more beautiful moments ahead."
+                </p>
+            </div>
+
+            <button onclick="goToStep(5)" class="btn-glow px-8 py-3.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white font-semibold flex items-center space-x-2 border border-pink-300/30">
+                <span>One Last Thing</span>
+                <i class="fas fa-envelope text-amber-300"></i>
+            </button>
+        </section>
+
+        <!-- 💌 STEP 5 – Final Letter -->
+        <section id="step-5" class="step-container step-hidden flex flex-col items-center text-center my-auto">
+            <div class="glass-card-glow p-7 md:p-9 rounded-3xl w-full text-center relative overflow-hidden">
+                <div class="w-12 h-12 mx-auto rounded-full bg-pink-500/20 flex items-center justify-center text-pink-300 text-xl mb-4 border border-pink-500/30 shadow-inner">
+                    💌
+                </div>
+
+                <h2 class="text-2xl md:text-3xl font-serif font-bold text-gradient-gold mb-6">
+                    A Message For You
+                </h2>
+
+                <div class="text-pink-100/90 text-sm md:text-base leading-relaxed space-y-4 font-light text-left bg-black/30 p-5 rounded-2xl border border-white/10 font-serif shadow-inner">
+                    <p>
+                        I know we don't talk much these days, but I still wanted to make something for your birthday.
+                    </p>
+                    <p>
+                        I genuinely hope life always gives you reasons to smile, the strength to chase your dreams, and people who value you for the wonderful person you are.
+                    </p>
+                    <p>
+                        Stay happy, stay healthy, and never lose that beautiful heart that makes you... <span class="text-amber-300 font-semibold underline decoration-amber-300/40 underline-offset-4">Au Heart</span>.
+                    </p>
+                    <p class="text-right font-bold text-pink-300 pt-2 font-handwriting text-2xl">
+                        Happy Birthday, Anu. ❤️
+                    </p>
+                </div>
+
+                <button onclick="triggerFinalCelebration()" class="btn-glow w-full mt-6 py-4 rounded-full bg-gradient-to-r from-amber-300 via-pink-500 to-rose-600 text-slate-950 font-bold text-base tracking-wide flex items-center justify-center space-x-2 shadow-2xl border border-amber-200/50">
+                    <span>Celebrate 🎉</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 🎆 FINAL CELEBRATION -->
+        <section id="step-final" class="step-container step-hidden flex flex-col items-center text-center my-auto">
+            <div class="glass-card-glow p-8 md:p-10 rounded-3xl w-full text-center relative overflow-hidden space-y-6">
+                <!-- Glowing SVG Heart -->
+                <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-pink-500 to-amber-300 p-0.5 shadow-2xl animate-heartbeat">
+                    <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center p-4">
+                        <svg viewBox="0 0 100 100" class="w-full h-full">
+                            <path d="M50 88 C20 65, 5 45, 5 28 C5 14, 16 5, 30 5 C39 5, 46 10, 50 17 C54 10, 61 5, 70 5 C84 5, 95 14, 95 28 C95 45, 80 65, 50 88 Z" fill="url(#mainHeartGrad)"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <p class="text-pink-200/90 text-sm md:text-base font-serif italic leading-relaxed">
+                        "Some people become a memory.<br>
+                        Some become a lesson.<br>
+                        And some... simply remain special. ❤️"
+                    </p>
+                </div>
+
+                <div class="py-2">
+                    <h1 class="text-3xl md:text-4xl font-serif font-extrabold text-gradient-gold tracking-tight">
+                        Happy Birthday, Anu! ✨
+                    </h1>
+                </div>
+
+                <div class="pt-2 border-t border-white/10">
+                    <p class="text-lg font-bold text-gradient-rose font-handwriting text-3xl">
+                        Made with ❤️ by Sumit
+                    </p>
+                </div>
+
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <button onclick="shootConfetti()" class="w-full sm:w-auto px-6 py-3 rounded-full bg-pink-500/20 hover:bg-pink-500/30 text-pink-200 text-xs font-semibold border border-pink-500/30 transition-all flex items-center justify-center space-x-2 shadow-md">
+                        <i class="fas fa-sparkles text-amber-300"></i>
+                        <span>Celebrate</span>
+                    </button>
+
+                    <button onclick="restartExperience()" class="w-full sm:w-auto px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold border border-white/20 transition-all flex items-center justify-center space-x-2 shadow-md">
+                        <i class="fas fa-redo"></i>
+                        <span>Replay</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        /* ==========================================
+           AUDIO SYSTEM (Keyboard Typing & Soft Tap)
+           ========================================== */
+        let audioCtx = null;
+        let isMuted = false;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioCtx = new AudioContext();
+                }
+            }
+        }
+
+        // Realistic Keyboard Mechanical Key Press Sound Generator (Loved typing sound!)
+        function playKeyClickSound() {
+            if (isMuted) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const now = audioCtx.currentTime;
+
+                // 1. Transient click noise
+                const bufferSize = audioCtx.sampleRate * 0.015; // 15ms click noise
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'highpass';
+                filter.frequency.setValueAtTime(1200 + Math.random() * 800, now);
+
+                const noiseGain = audioCtx.createGain();
+                noiseGain.gain.setValueAtTime(0.12, now);
+                noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.015);
+
+                noise.connect(filter);
+                filter.connect(noiseGain);
+                noiseGain.connect(audioCtx.destination);
+
+                // 2. Soft mechanical bottoming tone
+                const osc = audioCtx.createOscillator();
+                const oscGain = audioCtx.createGain();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(180 + Math.random() * 40, now);
+
+                oscGain.gain.setValueAtTime(0.08, now);
+                oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+
+                osc.connect(oscGain);
+                oscGain.connect(audioCtx.destination);
+
+                noise.start(now);
+                osc.start(now);
+                osc.stop(now + 0.025);
+            } catch(e) {}
+        }
+
+        // Soft, non-annoying warm micro-tap for buttons
+        function playSoftButtonTap() {
+            if (isMuted) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(320, now);
+                osc.frequency.exponentialRampToValueAtTime(180, now + 0.06);
+
+                gain.gain.setValueAtTime(0.03, now); // Extremely soft volume
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.06);
+            } catch(e) {}
+        }
+
+        // Warm Grand Celebration Chimes (played only on final celebration)
+        function playCelebrationChord() {
+            if (isMuted) return;
+            const freqs = [392.00, 523.25, 659.25, 783.99, 1046.50];
+            freqs.forEach((freq, idx) => {
+                setTimeout(() => {
+                    if (isMuted) return;
+                    try {
+                        initAudio();
+                        if (!audioCtx) return;
+                        const now = audioCtx.currentTime;
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now);
+                        gain.gain.setValueAtTime(0.05, now);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now);
+                        osc.stop(now + 1.2);
+                    } catch(e) {}
+                }, idx * 150);
+            });
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            const icon = document.getElementById('soundIcon');
+            const text = document.getElementById('soundText');
+            if (isMuted) {
+                icon.className = "fas fa-volume-xmark text-gray-400";
+                text.innerText = "Muted";
+                text.className = "font-medium text-gray-400";
+            } else {
+                icon.className = "fas fa-volume-high text-pink-400";
+                text.innerText = "Sound ON";
+                text.className = "font-medium text-pink-300";
+                playSoftButtonTap();
+            }
+        }
+
+
+        /* ==========================================
+           BACKGROUND CANVASES (Realistic Vector Hearts & Stars)
+           ========================================== */
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class RealisticHeartParticle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 30;
+                this.size = Math.random() * 16 + 10;
+                this.speedY = Math.random() * 0.6 + 0.25;
+                this.speedX = (Math.random() - 0.5) * 0.35;
+                this.opacity = Math.random() * 0.45 + 0.2;
+                this.type = Math.random() > 0.3 ? 'heart' : 'star';
+                this.rotation = (Math.random() - 0.5) * 0.4;
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < -30) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+
+                if (this.type === 'heart') {
+                    const scale = this.size / 30;
+                    ctx.scale(scale, scale);
+
+                    // 3D Shaded Heart Gradient
+                    const grad = ctx.createLinearGradient(-15, -15, 15, 15);
+                    grad.addColorStop(0, '#fca5a5');
+                    grad.addColorStop(0.35, '#f43f5e');
+                    grad.addColorStop(1, '#881337');
+
+                    ctx.beginPath();
+                    ctx.moveTo(0, 10);
+                    ctx.bezierCurveTo(-15, -5, -20, -20, -10, -25);
+                    ctx.bezierCurveTo(-2, -28, 0, -18, 0, -15);
+                    ctx.bezierCurveTo(0, -18, 2, -28, 10, -25);
+                    ctx.bezierCurveTo(20, -20, 15, -5, 0, 10);
+                    ctx.closePath();
+
+                    ctx.fillStyle = grad;
+                    ctx.shadowColor = '#f43f5e';
+                    ctx.shadowBlur = 8;
+                    ctx.fill();
+
+                    // Glossy Specular Highlight
+                    ctx.beginPath();
+                    ctx.arc(-5, -18, 2.5, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+                    ctx.fill();
+                } else {
+                    ctx.font = `${this.size * 0.7}px sans-serif`;
+                    ctx.fillStyle = '#fef08a';
+                    ctx.fillText('✦', 0, 0);
+                }
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 28; i++) {
+            particles.push(new RealisticHeartParticle());
+        }
+
+        function animateBg() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateBg);
+        }
+        animateBg();
+
+
+        /* ==========================================
+           OPENING & TYPING EFFECT SEQUENCE
+           ========================================== */
+        const openingOverlay = document.getElementById('openingOverlay');
+        const tapPrompt = document.getElementById('tapPrompt');
+        const introTextContainer = document.getElementById('introTextContainer');
+        const introTypedText = document.getElementById('introTypedText');
+
+        let openingStarted = false;
+
+        const openingLines = [
+            "Someone spent hours making this...",
+            "Just to make you smile on your birthday. ❤️",
+            "Every birthday deserves a beautiful memory...",
+            "And this is one of them."
+        ];
+
+        openingOverlay.addEventListener('click', startOpeningSequence);
+
+        function startOpeningSequence() {
+            if (openingStarted) return;
+            openingStarted = true;
+
+            initAudio();
+
+            tapPrompt.classList.add('hidden');
+            introTextContainer.classList.remove('hidden');
+
+            typeSequence(0);
+        }
+
+        function typeSequence(lineIndex) {
+            if (lineIndex >= openingLines.length) {
+                setTimeout(() => {
+                    openingOverlay.classList.add('opacity-0');
+                    setTimeout(() => {
+                        openingOverlay.classList.add('hidden');
+                        goToStep(1, true);
+                    }, 1000);
+                }, 1200);
+                return;
+            }
+
+            const currentText = openingLines[lineIndex];
+            introTypedText.innerHTML = '';
+            introTypedText.classList.add('typing-cursor');
+
+            let charIndex = 0;
+            const typingInterval = setInterval(() => {
+                introTypedText.innerHTML = currentText.substring(0, charIndex + 1);
+                
+                // Play key click sound for each typed character
+                if (currentText[charIndex] !== ' ') {
+                    playKeyClickSound();
+                }
+
+                charIndex++;
+
+                if (charIndex >= currentText.length) {
+                    clearInterval(typingInterval);
+                    introTypedText.classList.remove('typing-cursor');
+                    
+                    setTimeout(() => {
+                        typeSequence(lineIndex + 1);
+                    }, 1800);
+                }
+            }, 65);
+        }
+
+
+        /* ==========================================
+           STEP NAVIGATION SYSTEM
+           ========================================== */
+        let currentStep = 0;
+
+        function goToStep(stepNum, silent = false) {
+            if (!silent) {
+                playSoftButtonTap();
+            }
+
+            for (let i = 1; i <= 5; i++) {
+                const el = document.getElementById(`step-${i}`);
+                if (el) {
+                    el.classList.remove('step-active');
+                    el.classList.add('step-hidden');
+                }
+            }
+            const finalEl = document.getElementById('step-final');
+            if (finalEl) {
+                finalEl.classList.remove('step-active');
+                finalEl.classList.add('step-hidden');
+            }
+
+            let target;
+            if (stepNum === 'final') {
+                target = document.getElementById('step-final');
+            } else {
+                target = document.getElementById(`step-${stepNum}`);
+            }
+
+            if (target) {
+                target.classList.remove('step-hidden');
+                target.classList.add('step-active');
+                
+                // Scroll to top smoothly for mobile Chrome visibility
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            currentStep = stepNum;
+        }
+
+
+        /* ==========================================
+           STEP 4: PHOTO GALLERY SLIDESHOW
+           ========================================== */
+        let galleryData = [
+            {
+                url: "assets/pic1.jpg",
+                title: "pic 1",
+                caption: "✨ Bright moments & warm smiles..."
+            },
+            {
+                url: "assets/pic2.jpg",
+                title: "pic 2",
+                caption: "🌸 Simplicity at its finest."
+            },
+            {
+                url: "assets/pic3.jpg",
+                title: "pic 3",
+                caption: "🎂 Wishing you an unforgettable year ahead."
+            }
+        ];
+
+        let currentSlide = 0;
+
+        function handleImageError(img) {
+            img.classList.add('hidden');
+            document.getElementById('imageFallbackCard').classList.remove('hidden');
+        }
+
+        function renderDots() {
+            const dotsContainer = document.getElementById('slideDots');
+            dotsContainer.innerHTML = '';
+            galleryData.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.className = `w-2.5 h-2.5 rounded-full transition-all ${idx === currentSlide ? 'bg-pink-400 w-6' : 'bg-white/30'}`;
+                dot.onclick = () => showSlide(idx);
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function showSlide(index) {
+            if (index < 0) index = galleryData.length - 1;
+            if (index >= galleryData.length) index = 0;
+            currentSlide = index;
+
+            const imgEl = document.getElementById('galleryImage');
+            const capEl = document.getElementById('galleryCaption');
+            const fallbackCard = document.getElementById('imageFallbackCard');
+            const fallbackTitle = document.getElementById('fallbackTitle');
+
+            imgEl.style.opacity = '0';
+            setTimeout(() => {
+                imgEl.classList.remove('hidden');
+                fallbackCard.classList.add('hidden');
+                
+                imgEl.src = galleryData[currentSlide].url;
+                capEl.innerText = galleryData[currentSlide].caption;
+                fallbackTitle.innerText = galleryData[currentSlide].title;
+
+                imgEl.style.opacity = '1';
+            }, 200);
+
+            renderDots();
+        }
+
+        function nextSlide() {
+            playSoftButtonTap();
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            playSoftButtonTap();
+            showSlide(currentSlide - 1);
+        }
+
+        renderDots();
+
+
+        /* ==========================================
+           FINAL CELEBRATION & CONFETTI
+           ========================================== */
+        function triggerFinalCelebration() {
+            goToStep('final');
+            shootConfetti();
+            playCelebrationChord();
+        }
+
+        function shootConfetti() {
+            playSoftButtonTap();
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 85,
+                    spread: 75,
+                    origin: { y: 0.6, x: 0.2 },
+                    colors: ['#f472b6', '#fef08a', '#e8b4b8', '#ffffff']
+                });
+                confetti({
+                    particleCount: 85,
+                    spread: 75,
+                    origin: { y: 0.6, x: 0.8 },
+                    colors: ['#f472b6', '#fef08a', '#e8b4b8', '#ffffff']
+                });
+            }
+        }
+
+        function restartExperience() {
+            currentStep = 0;
+            openingStarted = false;
+            openingOverlay.classList.remove('hidden', 'opacity-0');
+            tapPrompt.classList.remove('hidden');
+            introTextContainer.classList.add('hidden');
+            introTypedText.innerHTML = '';
+            goToStep(1, true);
+            document.getElementById(`step-1`).classList.add('step-hidden');
+            document.getElementById(`step-1`).classList.remove('step-active');
+        }
+    </script>
+</body>
+</html>
+
