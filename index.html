@@ -353,7 +353,7 @@
             <div class="glass-card p-4 md:p-6 rounded-3xl w-full mb-6 relative">
                 <div class="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-slate-950/80 border border-white/15 shadow-2xl mb-4 group flex items-center justify-center">
                     
-                    <img id="galleryImage" src="assets/pic1.jpg" alt="Memory" 
+                    <img id="galleryImage" src="assets/pic1.png" alt="Memory" 
                          onerror="handleImageError(this)" 
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
 
@@ -362,7 +362,7 @@
                             <i class="fas fa-image"></i>
                         </div>
                         <h4 id="fallbackTitle" class="text-xl font-bold font-serif text-gradient-gold mb-1">pic 1</h4>
-                        <p class="text-xs text-pink-200/60 font-mono">assets/pic1.jpg</p>
+                        <p class="text-xs text-pink-200/60 font-mono">assets/pic1.png</p>
                     </div>
 
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none"></div>
@@ -918,9 +918,9 @@
 
         const openingLines = [
             "Someone spent hours making this...",
-            "Just to make you feel special on your birthday. ❤️",
+            "Just to make you smile on your birthday. ❤️",
             "Every birthday deserves a beautiful memory...",
-            "And I hope this is one of them."
+            "And this is one of them."
         ];
 
         openingOverlay.addEventListener('click', startOpeningSequence);
@@ -1027,17 +1027,17 @@
            ========================================== */
         let galleryData = [
             {
-                url: "assets/pic1.jpg",
+                url: "assets/pic1.png",
                 title: "pic 1",
                 caption: "✨ Bright moments & warm smiles..."
             },
             {
-                url: "assets/pic2.jpg",
+                url: "assets/pic2.png",
                 title: "pic 2",
                 caption: "🌸 Simplicity at its finest."
             },
             {
-                url: "assets/pic3.jpg",
+                url: "assets/pic3.png",
                 title: "pic 3",
                 caption: "🎂 Wishing you an unforgettable year ahead."
             }
@@ -1108,8 +1108,8 @@
         }
 
         function shootConfetti() {
-            playFirecrackerAsset(); // Plays assets/sound1.mp3
-            launchFireworkDisplay(); // Launches full-screen visual firework rockets!
+            playFirecrackerAsset();
+            launchFireworkDisplay();
 
             if (typeof confetti === 'function') {
                 confetti({
@@ -1141,4 +1141,3 @@
     </script>
 </body>
 </html>
-
